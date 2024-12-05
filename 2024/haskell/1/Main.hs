@@ -3,7 +3,7 @@ import Data.Maybe(fromMaybe)
 import GHC.Internal.System.IO (readFile')
 import qualified Data.Map as Map
 
-process :: String -> ([Integer], [Integer])
+process :: String -> ([Int], [Int])
 process s = 
     let lns = lines s
         pairs = map words lns 
@@ -12,7 +12,7 @@ process s =
     in (lefts, rights)
 
 
-readInputFile :: IO ([Integer], [Integer])
+readInputFile :: IO ([Int], [Int])
 readInputFile = do
     contents <- readFile' "./input.txt"
     let result = process contents
@@ -27,7 +27,7 @@ part1 = do
     print $ sum differences
 
 
-createFrequencyMap :: [Integer] -> Map.Map Integer Integer
+createFrequencyMap :: [Int] -> Map.Map Int Int
 createFrequencyMap nums = foldl' (\acc x -> Map.insertWith (+) x 1 acc) Map.empty nums
 
 part2 :: IO ()
