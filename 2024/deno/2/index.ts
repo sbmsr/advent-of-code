@@ -37,20 +37,7 @@ function part2(reports: number[][]) {
   const generateReportsWithOneNumberRemoved = (report: number[]): number[][] => {
     return report.map((_, i) => report.filter((_, j) => i !== j));
   };
-
-  // reportsPlusOmissions is numbers[][][]
-  // [
-  //  [[...], ...]
-  //  ...
-  // ]
-
   const reportsPlusOmissions = reports.map((report) => [report].concat(generateReportsWithOneNumberRemoved(report)));
-
-  // turn it into boolean[]
-  // [
-  //  true/false,
-  //  ...
-  // ]
 
   return reportsPlusOmissions
     .flatMap((reports) => reports.map((r) => isReportValid(r)).reduce((a, b) => a || b))
