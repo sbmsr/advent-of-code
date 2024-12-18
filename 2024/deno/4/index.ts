@@ -134,35 +134,26 @@ function part1(input: string[][]) {
   return acc;
 }
 
-function safeAccess(input: string[][], x: number, y: number) {
-  if (x >= 0 && x < input.length) {
-    if (y >= 0 && y < input[x].length) {
-      return input[x][y];
-    }
-  }
-  return undefined;
-}
-
 function isTwoMASInShapeOfX(input: string[][], x: number, y: number) {
   // M . S    S . M    S . S    M . M
   // . A . or . A . or . A . or . A .
   // M . S    S . M    M . M    S . S
 
-  const center = safeAccess(input, x, y)
-  const topLeft = safeAccess(input, x - 1, y - 1);
-  const topRight = safeAccess(input, x + 1, y - 1);
-  const bottomLeft = safeAccess(input, x - 1, y + 1); 
-  const bottomRight = safeAccess(input, x + 1, y + 1);
+  const center = input[x]?.[y];
+  const topLeft = input[x - 1]?.[y - 1];
+  const topRight = input[x + 1]?.[y - 1];
+  const bottomLeft = input[x - 1]?.[y + 1];
+  const bottomRight = input[x + 1]?.[y + 1];
 
   // back diagonal (\)
 
-  const backDiagonal = `${topLeft}${center}${bottomRight}`
+  const backDiagonal = `${topLeft}${center}${bottomRight}`;
 
   // forward diagonal (/)
 
-  const forwardDiagonal = `${bottomLeft}${center}${topRight}`
+  const forwardDiagonal = `${bottomLeft}${center}${topRight}`;
 
-  return (backDiagonal === "MAS" || backDiagonal === "SAM") && (forwardDiagonal === "MAS" || forwardDiagonal === "SAM")
+  return (backDiagonal === "MAS" || backDiagonal === "SAM") && (forwardDiagonal === "MAS" || forwardDiagonal === "SAM");
 }
 
 function part2(input: string[][]) {
